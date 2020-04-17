@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterfirebaseddd/domain/auth/auht_failure.dart';
 import 'package:flutterfirebaseddd/domain/auth/i_auth_facade.dart';
-import 'package:flutterfirebaseddd/domain/auth/value_object.dart';
+import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthFacade implements IAuthFacade {
