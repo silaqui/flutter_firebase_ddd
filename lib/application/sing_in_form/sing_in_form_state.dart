@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/auth/auht_failure.dart';
-import 'package:flutterfirebaseddd/domain/auth/value_object.dart';
+import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sing_in_form_state.freezed.dart';

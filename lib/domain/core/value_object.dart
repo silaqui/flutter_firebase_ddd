@@ -10,6 +10,8 @@ abstract class ValueObject<T> {
 
   Either<ValueFailure<T>, T> get value;
 
+  bool isValid() => value.isRight();
+
   /// Throws [UnexpectedValueError] containing the [ValueFailure]
   T getOrCrash() {
     //id - same as (right) => right
