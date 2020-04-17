@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutterfirebaseddd/domain/core/errors.dart';
 import 'package:meta/meta.dart';
 
 import 'failure.dart';
@@ -8,6 +9,12 @@ abstract class ValueObject<T> {
   const ValueObject();
 
   Either<ValueFailure<T>, T> get value;
+
+  /// Throws [UnexpectedValueError] containing the [ValueFailure]
+  T getOrCrash() {
+    //id - same as (right) => right
+    return value.fold((f) => throw UnexpectedValueError(f), id);
+  }
 
   @override
   int get hashCode => value.hashCode;

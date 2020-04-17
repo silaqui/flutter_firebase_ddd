@@ -22,5 +22,5 @@ abstract class SingInFormState with _$SingInFormState {
           showErrorMessage: false,
           isSubmitting: false,
           authFailOrSuccessOption: none()
-      )
+      );
 }
