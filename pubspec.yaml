@@ -4,7 +4,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.1.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -13,14 +13,13 @@ dependencies:
   freezed_annotation: ^0.7.1
   flutter_bloc: ^3.2.0
   firebase_core: ^0.4.4+3
-  firebase_auth: ^0.15.5+3
-  google_sign_in: ^4.4.1
+  firebase_auth: ^0.16.0
+  google_sign_in: ^4.4.2
+  get_it: ^4.0.1
+  injectable: ^0.3.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   build_runner:
-  freezed: ^0.10.5
-
-flutter:
-  uses-material-design: true
+  freezed: ^0.10.6
+  lint: ^1.1.1
+  injectable_generator: ^0.3.4

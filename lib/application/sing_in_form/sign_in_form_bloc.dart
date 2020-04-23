@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
@@ -10,48 +11,57 @@ import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
 
 import './bloc.dart';
 
-class SingInFormBloc extends Bloc<SingInFormEvent, SingInFormState> {
+@injectable
+class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _authFacade;
 
-  SingInFormBloc(this._authFacade);
+  SignInFormBloc(this._authFacade);
 
   @override
-  SingInFormState get initialState => SingInFormState.initial();
+  SignInFormState get initialState => SignInFormState.initial();
 
   @override
-  Stream<SingInFormState> mapEventToState(
-    SingInFormEvent event,
-  ) async* {
+  Stream<SignInFormState> mapEventToState(
+      SignInFormEvent event,
+      ) async* {
     yield* event.map(
       emailChanged: (e) async* {
         yield state.copyWith(
-            emailAddress: EmailAddress(e.emailStr),
-            authFailOrSuccessOption: none());
+          emailAddress: EmailAddress(e.emailStr),
+          authFailureOrSuccessOption: none(),
+        );
       },
       passwordChanged: (e) async* {
         yield state.copyWith(
-            password: Password(e.passwordStr), authFailOrSuccessOption: none());
+          password: Password(e.passwordStr),
+          authFailureOrSuccessOption: none(),
+        );
       },
       registerWithEmailAndPasswordPressed: (e) async* {
-        _preformActionOnAuthFacadeWithEmailAndPassword(
-            _authFacade.registerWithEmailAndPassword);
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.registerWithEmailAndPassword,
+        );
       },
       signInWithEmailAndPasswordPressed: (e) async* {
-        _preformActionOnAuthFacadeWithEmailAndPassword(
-            _authFacade.signInWithEmailAndPassword);
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.signInWithEmailAndPassword,
+        );
       },
       signInWithGooglePressed: (e) async* {
         yield state.copyWith(
-            isSubmitting: true, authFailOrSuccessOption: none());
+          isSubmitting: true,
+          authFailureOrSuccessOption: none(),
+        );
         final failureOrSuccess = await _authFacade.signInWithGoogle();
         yield state.copyWith(
-            isSubmitting: false,
-            authFailOrSuccessOption: some(failureOrSuccess));
+          isSubmitting: false,
+          authFailureOrSuccessOption: some(failureOrSuccess),
+        );
       },
     );
   }
 
-  Stream<SingInFormState> _preformActionOnAuthFacadeWithEmailAndPassword(
+  Stream<SignInFormState> _preformActionOnAuthFacadeWithEmailAndPassword(
     Future<Either<AuthFailure, Unit>> Function({
       @required EmailAddress emailAddress,
       @required Password password,

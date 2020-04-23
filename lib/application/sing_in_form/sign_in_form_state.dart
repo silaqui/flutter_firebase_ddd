@@ -3,20 +3,20 @@ import 'package:flutterfirebaseddd/domain/auth/auht_failure.dart';
 import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'sing_in_form_state.freezed.dart';
+part 'sign_in_form_state.freezed.dart';
 
 @freezed
-abstract class SingInFormState with _$SingInFormState {
-  const factory SingInFormState({
+abstract class SignInFormState with _$SignInFormState {
+  const factory SignInFormState({
     @required EmailAddress emailAddress,
     @required Password password,
     @required bool showErrorMessage,
     @required bool isSubmitting,
     @required Option<Either<AuthFailure, Unit>> authFailOrSuccessOption,
-  }) = _SingInFormState;
+  }) = _SignInFormState;
 
-  factory SingInFormState.initial() =>
-      SingInFormState(
+  factory SignInFormState.initial() =>
+      SignInFormState(
           emailAddress: EmailAddress(''),
           password: Password(''),
           showErrorMessage: false,
