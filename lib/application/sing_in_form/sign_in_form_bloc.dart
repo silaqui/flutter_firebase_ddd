@@ -28,13 +28,13 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       emailChanged: (e) async* {
         yield state.copyWith(
           emailAddress: EmailAddress(e.emailStr),
-          authFailureOrSuccessOption: none(),
+          authFailOrSuccessOption: none(),
         );
       },
       passwordChanged: (e) async* {
         yield state.copyWith(
           password: Password(e.passwordStr),
-          authFailureOrSuccessOption: none(),
+          authFailOrSuccessOption: none(),
         );
       },
       registerWithEmailAndPasswordPressed: (e) async* {
@@ -50,18 +50,18 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       signInWithGooglePressed: (e) async* {
         yield state.copyWith(
           isSubmitting: true,
-          authFailureOrSuccessOption: none(),
+          authFailOrSuccessOption: none(),
         );
         final failureOrSuccess = await _authFacade.signInWithGoogle();
         yield state.copyWith(
           isSubmitting: false,
-          authFailureOrSuccessOption: some(failureOrSuccess),
+          authFailOrSuccessOption: some(failureOrSuccess),
         );
       },
     );
   }
 
-  Stream<SignInFormState> _preformActionOnAuthFacadeWithEmailAndPassword(
+  Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword(
     Future<Either<AuthFailure, Unit>> Function({
       @required EmailAddress emailAddress,
       @required Password password,
