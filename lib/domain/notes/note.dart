@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
 import 'package:flutterfirebaseddd/domain/core/failure.dart';
+import 'package:flutterfirebaseddd/domain/notes/todo_item.dart';
 import 'package:flutterfirebaseddd/domain/notes/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/collection.dart';
@@ -15,7 +16,7 @@ abstract class Note implements _$Note {
     @required UniqueId id,
     @required NoteBody body,
     @required NoteColor color,
-    @required List3<TodoName> todos,
+    @required List3<TodoItem> todos,
   }) = _Note;
 
   factory Note.empty() => Note(

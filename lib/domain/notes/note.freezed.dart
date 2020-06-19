@@ -16,7 +16,7 @@ class _$NoteTearOff {
       {@required UniqueId id,
       @required NoteBody body,
       @required NoteColor color,
-      @required List3<TodoName> todos}) {
+      @required List3<TodoItem> todos}) {
     return _Note(
       id: id,
       body: body,
@@ -33,7 +33,7 @@ mixin _$Note {
   UniqueId get id;
   NoteBody get body;
   NoteColor get color;
-  List3<TodoName> get todos;
+  List3<TodoItem> get todos;
 
   $NoteCopyWith<Note> get copyWith;
 }
@@ -42,7 +42,7 @@ abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res>;
   $Res call(
-      {UniqueId id, NoteBody body, NoteColor color, List3<TodoName> todos});
+      {UniqueId id, NoteBody body, NoteColor color, List3<TodoItem> todos});
 }
 
 class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
@@ -63,7 +63,7 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
       id: id == freezed ? _value.id : id as UniqueId,
       body: body == freezed ? _value.body : body as NoteBody,
       color: color == freezed ? _value.color : color as NoteColor,
-      todos: todos == freezed ? _value.todos : todos as List3<TodoName>,
+      todos: todos == freezed ? _value.todos : todos as List3<TodoItem>,
     ));
   }
 }
@@ -73,7 +73,7 @@ abstract class _$NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
       __$NoteCopyWithImpl<$Res>;
   @override
   $Res call(
-      {UniqueId id, NoteBody body, NoteColor color, List3<TodoName> todos});
+      {UniqueId id, NoteBody body, NoteColor color, List3<TodoItem> todos});
 }
 
 class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
@@ -95,7 +95,7 @@ class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as UniqueId,
       body: body == freezed ? _value.body : body as NoteBody,
       color: color == freezed ? _value.color : color as NoteColor,
-      todos: todos == freezed ? _value.todos : todos as List3<TodoName>,
+      todos: todos == freezed ? _value.todos : todos as List3<TodoItem>,
     ));
   }
 }
@@ -119,7 +119,7 @@ class _$_Note extends _Note {
   @override
   final NoteColor color;
   @override
-  final List3<TodoName> todos;
+  final List3<TodoItem> todos;
 
   @override
   String toString() {
@@ -159,7 +159,7 @@ abstract class _Note extends Note {
       {@required UniqueId id,
       @required NoteBody body,
       @required NoteColor color,
-      @required List3<TodoName> todos}) = _$_Note;
+      @required List3<TodoItem> todos}) = _$_Note;
 
   @override
   UniqueId get id;
@@ -168,7 +168,7 @@ abstract class _Note extends Note {
   @override
   NoteColor get color;
   @override
-  List3<TodoName> get todos;
+  List3<TodoItem> get todos;
   @override
   _$NoteCopyWith<_Note> get copyWith;
 }
