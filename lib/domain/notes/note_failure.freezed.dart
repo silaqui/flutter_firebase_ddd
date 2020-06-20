@@ -15,6 +15,10 @@ class _$NoteFailureTearOff {
   _Unexpected unexpected() {
     return const _Unexpected();
   }
+
+  _UnSufficientPermission unSufficientPermission() {
+    return const _UnSufficientPermission();
+  }
 }
 
 // ignore: unused_element
@@ -24,19 +28,23 @@ mixin _$NoteFailure {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result unexpected(),
+    @required Result unSufficientPermission(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
+    Result unSufficientPermission(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unexpected(_Unexpected value),
+    @required Result unSufficientPermission(_UnSufficientPermission value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unexpected(_Unexpected value),
+    Result unSufficientPermission(_UnSufficientPermission value),
     @required Result orElse(),
   });
 }
@@ -91,8 +99,10 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result unexpected(),
+    @required Result unSufficientPermission(),
   }) {
     assert(unexpected != null);
+    assert(unSufficientPermission != null);
     return unexpected();
   }
 
@@ -100,6 +110,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
+    Result unSufficientPermission(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -113,8 +124,10 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unexpected(_Unexpected value),
+    @required Result unSufficientPermission(_UnSufficientPermission value),
   }) {
     assert(unexpected != null);
+    assert(unSufficientPermission != null);
     return unexpected(this);
   }
 
@@ -122,6 +135,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unexpected(_Unexpected value),
+    Result unSufficientPermission(_UnSufficientPermission value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -134,4 +148,92 @@ class _$_Unexpected implements _Unexpected {
 
 abstract class _Unexpected implements NoteFailure {
   const factory _Unexpected() = _$_Unexpected;
+}
+
+abstract class _$UnSufficientPermissionCopyWith<$Res> {
+  factory _$UnSufficientPermissionCopyWith(_UnSufficientPermission value,
+          $Res Function(_UnSufficientPermission) then) =
+      __$UnSufficientPermissionCopyWithImpl<$Res>;
+}
+
+class __$UnSufficientPermissionCopyWithImpl<$Res>
+    extends _$NoteFailureCopyWithImpl<$Res>
+    implements _$UnSufficientPermissionCopyWith<$Res> {
+  __$UnSufficientPermissionCopyWithImpl(_UnSufficientPermission _value,
+      $Res Function(_UnSufficientPermission) _then)
+      : super(_value, (v) => _then(v as _UnSufficientPermission));
+
+  @override
+  _UnSufficientPermission get _value => super._value as _UnSufficientPermission;
+}
+
+class _$_UnSufficientPermission implements _UnSufficientPermission {
+  const _$_UnSufficientPermission();
+
+  @override
+  String toString() {
+    return 'NoteFailure.unSufficientPermission()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _UnSufficientPermission);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unexpected(),
+    @required Result unSufficientPermission(),
+  }) {
+    assert(unexpected != null);
+    assert(unSufficientPermission != null);
+    return unSufficientPermission();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unexpected(),
+    Result unSufficientPermission(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (unSufficientPermission != null) {
+      return unSufficientPermission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unexpected(_Unexpected value),
+    @required Result unSufficientPermission(_UnSufficientPermission value),
+  }) {
+    assert(unexpected != null);
+    assert(unSufficientPermission != null);
+    return unSufficientPermission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unexpected(_Unexpected value),
+    Result unSufficientPermission(_UnSufficientPermission value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (unSufficientPermission != null) {
+      return unSufficientPermission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UnSufficientPermission implements NoteFailure {
+  const factory _UnSufficientPermission() = _$_UnSufficientPermission;
 }
