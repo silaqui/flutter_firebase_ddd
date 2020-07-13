@@ -14,13 +14,16 @@ class AppWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
+          create: (context) =>
+              getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
         )
       ],
       child: MaterialApp(
         title: 'Notes',
         builder: ExtendedNavigator(router: Router()),
         theme: ThemeData.light().copyWith(
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+                backgroundColor: Colors.purple[900]),
             primaryColor: Colors.purple[800],
             accentColor: Colors.yellow,
             inputDecorationTheme: InputDecorationTheme(

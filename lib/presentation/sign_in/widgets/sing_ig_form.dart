@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterfirebaseddd/application/auth/auth_bloc.dart';
+import 'package:flutterfirebaseddd/application/auth/auth_event.dart';
 import 'package:flutterfirebaseddd/application/sing_in_form/bloc.dart';
+import 'package:flutterfirebaseddd/presentation/routes/router.gr.dart';
 
 class SignInForm extends StatelessWidget {
   @override
@@ -23,7 +27,11 @@ class SignInForm extends StatelessWidget {
                 )).show(context);
               },
               (_) {
-                //TODO Navigate
+                ExtendedNavigator.of(context)
+                    .pushReplacementNamed(Routes.notesOverviewPage);
+                context
+                    .bloc<AuthBloc>()
+                    .add(const AuthEvent.authCheckRequested());
               },
             );
           },
@@ -124,8 +132,10 @@ class SignInForm extends StatelessWidget {
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
-                if(state.isSubmitting)...[
-                  const SizedBox(height: 8,),
+                if (state.isSubmitting) ...[
+                  const SizedBox(
+                    height: 8,
+                  ),
                   const LinearProgressIndicator()
                 ]
               ],
