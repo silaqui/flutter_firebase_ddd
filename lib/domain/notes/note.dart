@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
 import 'package:flutterfirebaseddd/domain/core/failure.dart';
+import 'package:flutterfirebaseddd/domain/core/value_object.dart';
 import 'package:flutterfirebaseddd/domain/notes/todo_item.dart';
 import 'package:flutterfirebaseddd/domain/notes/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,7 +23,7 @@ abstract class Note implements _$Note {
         id: UniqueId(),
         body: NoteBody(''),
         color: NoteColor(NoteColor.predefinedColors[1]),
-        todos: List3(KtList.empty()),
+        todos: List3(emptyList()),
       );
 
   Option<ValueFailure<dynamic>> get failureOption {

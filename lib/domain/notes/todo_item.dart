@@ -1,8 +1,8 @@
-import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/core/failure.dart';
+import 'package:flutterfirebaseddd/domain/core/value_object.dart';
 import 'package:flutterfirebaseddd/domain/notes/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:dartz/dartz.dart';
 
 part 'todo_item.freezed.dart';
 

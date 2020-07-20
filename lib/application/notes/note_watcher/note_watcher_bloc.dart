@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/notes/i_note_repository.dart';
@@ -6,6 +7,7 @@ import 'package:flutterfirebaseddd/domain/notes/note.dart';
 import 'package:flutterfirebaseddd/domain/notes/note_failure.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
+
 import './bloc.dart';
 
 @injectable
@@ -36,7 +38,7 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
         add(NoteWatcherEvent.noteReceived(event));
       });
     }, noteReceived: (e) async* {
-      e.failureOrNotes.fold(
+      yield e.failureOrNotes.fold(
         (failure) => NoteWatcherState.loadFailure(failure),
         (notes) => NoteWatcherState.loadSuccess(notes),
       );

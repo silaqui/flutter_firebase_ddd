@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
+import 'package:flutterfirebaseddd/domain/core/value_object.dart';
 import 'package:flutterfirebaseddd/domain/notes/note.dart';
 import 'package:flutterfirebaseddd/domain/notes/todo_item.dart';
 import 'package:flutterfirebaseddd/domain/notes/value_objects.dart';
@@ -9,7 +9,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
 
 part 'note_dtos.freezed.dart';
-
 part 'note_dtos.g.dart';
 
 @freezed

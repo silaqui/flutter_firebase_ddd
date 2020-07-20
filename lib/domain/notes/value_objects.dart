@@ -1,8 +1,8 @@
 import 'dart:ui';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/core/failure.dart';
 import 'package:flutterfirebaseddd/domain/core/value_object.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/core/value_transformers.dart';
 import 'package:flutterfirebaseddd/domain/core/value_validators.dart';
 import 'package:kt_dart/collection.dart';
@@ -60,15 +60,17 @@ class NoteColor extends ValueObject<Color> {
   const NoteColor._(this.value);
 }
 
-class List3<T> extends ValueObject<KtList> {
+class List3<T> extends ValueObject<KtList<T>> {
   @override
-  final Either<ValueFailure<KtList>, KtList> value;
+  final Either<ValueFailure<KtList<T>>, KtList<T>> value;
 
   static const maxLength = 3;
 
   factory List3(KtList<T> input) {
     assert(input != null);
-    return List3<T>._(validateMaxListLength(input, maxLength));
+    return List3._(
+      validateMaxListLength(input, maxLength),
+    );
   }
 
   const List3._(this.value);
