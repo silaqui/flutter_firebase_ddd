@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfirebaseddd/application/notes/note_watcher/bloc.dart';
+import 'package:flutterfirebaseddd/presentation/notes/notes_overview/widgets/critical_failure_display_widget.dart';
+import 'package:flutterfirebaseddd/presentation/notes/notes_overview/widgets/note_card_widget.dart';
+
+import 'error_note_card.dart';
 
 class NotesOverviewBody extends StatelessWidget {
   @override
@@ -16,26 +20,17 @@ class NotesOverviewBody extends StatelessWidget {
               itemBuilder: (context, index) {
                 final note = state.notes[index];
                 if (note.failureOption.isSome()) {
-                  return Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.red,
-                  );
+                  return ErrorNoteCard(note: note);
                 }
-                return Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.green,
-                );
+                return NoteCard(note: note);
               },
               itemCount: state.notes.size,
             );
           },
-          loadFailure: (_) => Container(
-            width: 200,
-            height: 200,
-            color: Colors.yellow,
-          ),
+          loadFailure: (state) =>
+              CriticalFailureDisplay(
+                noteFailure: state.noteFailure,
+              ),
         );
       },
     );
