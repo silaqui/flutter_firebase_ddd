@@ -14,12 +14,10 @@ import './bloc.dart';
 class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
   final INoteRepository _noteRepository;
 
-  NoteWatcherBloc(this._noteRepository);
+  NoteWatcherBloc(this._noteRepository)
+      : super(const NoteWatcherState.initial());
 
   StreamSubscription<Either<NoteFailure, KtList<Note>>> _streamSubscription;
-
-  @override
-  NoteWatcherState get initialState => const NoteWatcherState.initial();
 
   @override
   Stream<NoteWatcherState> mapEventToState(
@@ -39,8 +37,8 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
       });
     }, noteReceived: (e) async* {
       yield e.failureOrNotes.fold(
-        (failure) => NoteWatcherState.loadFailure(failure),
-        (notes) => NoteWatcherState.loadSuccess(notes),
+            (failure) => NoteWatcherState.loadFailure(failure),
+            (notes) => NoteWatcherState.loadSuccess(notes),
       );
     });
   }

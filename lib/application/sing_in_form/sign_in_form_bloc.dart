@@ -1,13 +1,12 @@
 import 'dart:core';
 
-import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/auth/auht_failure.dart';
 import 'package:flutterfirebaseddd/domain/auth/i_auth_facade.dart';
 import 'package:flutterfirebaseddd/domain/auth/value_objects.dart';
+import 'package:injectable/injectable.dart';
+import 'package:meta/meta.dart';
 
 import './bloc.dart';
 
@@ -15,15 +14,12 @@ import './bloc.dart';
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _authFacade;
 
-  SignInFormBloc(this._authFacade);
-
-  @override
-  SignInFormState get initialState => SignInFormState.initial();
+  SignInFormBloc(this._authFacade) : super(SignInFormState.initial());
 
   @override
   Stream<SignInFormState> mapEventToState(
-      SignInFormEvent event,
-      ) async* {
+    SignInFormEvent event,
+  ) async* {
     yield* event.map(
       emailChanged: (e) async* {
         yield state.copyWith(

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutterfirebaseddd/domain/notes/i_note_repository.dart';
@@ -6,16 +7,14 @@ import 'package:flutterfirebaseddd/domain/notes/note_failure.dart';
 import 'package:flutterfirebaseddd/domain/notes/value_objects.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
+
 import './note_bloc.dart';
 
 @injectable
 class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
   final INoteRepository _noteRepository;
 
-  NoteFormBloc(this._noteRepository);
-
-  @override
-  NoteFormState get initialState => NoteFormState.initial();
+  NoteFormBloc(this._noteRepository) : super(NoteFormState.initial());
 
   @override
   Stream<NoteFormState> mapEventToState(
@@ -45,8 +44,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
       todosChanged: (e) async* {
         yield state.copyWith(
           note: state.note.copyWith(
-            todos:
-                List3(e.todos.map((e) => e.toDomain())),
+            todos: List3(e.todos.map((e) => e.toDomain())),
           ),
           saveFailureOrSuccessOption: none(),
         );
