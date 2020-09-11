@@ -7,6 +7,7 @@ import 'package:flutterfirebaseddd/application/notes/note_form/note_bloc.dart';
 import 'package:flutterfirebaseddd/domain/notes/note.dart';
 import 'package:flutterfirebaseddd/injection.dart';
 import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/body_field.dart';
+import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/color_field.dart';
 import 'package:flutterfirebaseddd/presentation/routes/router.gr.dart';
 
 class NoteFormPage extends StatelessWidget {
@@ -124,6 +125,7 @@ class NoteFromPageScaffold extends StatelessWidget {
                 child: Column(
               children: <Widget>[
                 const BodyField(),
+                const ColorField(),
               ],
             )),
           );
