@@ -1,18 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/services.dart';
 import 'package:flutterfirebaseddd/domain/notes/i_note_repository.dart';
 import 'package:flutterfirebaseddd/domain/notes/note.dart';
 import 'package:flutterfirebaseddd/domain/notes/note_failure.dart';
+import 'package:flutterfirebaseddd/infrastructure/core/firestore_helpers.dart';
 import 'package:flutterfirebaseddd/infrastructure/notes/note_dtos.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutterfirebaseddd/infrastructure/core/firestore_helpers.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: INoteRepository)
 class NoteRepository implements INoteRepository {
-  final Firestore _firestore;
+  final FirebaseFirestore _firestore;
 
   NoteRepository(this._firestore);
 
@@ -24,13 +23,13 @@ class NoteRepository implements INoteRepository {
         .snapshots()
         .map(
           (s) => right<NoteFailure, KtList<Note>>(
-            s.documents
+        s.docs
                 .map((doc) => NoteDto.fromFirestore(doc).toDomain())
                 .toImmutableList(),
           ),
         )
         .onErrorReturnWith((err) {
-      if (err is PlatformException &&
+      if (err is FirebaseException &&
           err.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.unSufficientPermission());
       } else {
@@ -45,8 +44,7 @@ class NoteRepository implements INoteRepository {
     yield* userDoc.noteCollection
         .orderBy("serverTimestamp", descending: true)
         .snapshots()
-        .map((s) =>
-            s.documents.map((doc) => NoteDto.fromFirestore(doc).toDomain()))
+        .map((s) => s.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()))
         .map(
           (notes) => right<NoteFailure, KtList<Note>>(
             notes
@@ -56,7 +54,7 @@ class NoteRepository implements INoteRepository {
           ),
         )
         .onErrorReturnWith((err) {
-      if (err is PlatformException &&
+      if (err is FirebaseException &&
           err.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.unSufficientPermission());
       } else {
@@ -71,10 +69,10 @@ class NoteRepository implements INoteRepository {
       final userDoc = await _firestore.userDocument();
       final noteDto = NoteDto.fromDomain(note);
       await userDoc.noteCollection
-          .document(noteDto.id)
-          .setData(noteDto.toJson());
+          .doc(noteDto.id)
+          .update(noteDto.toJson());
       return right(unit);
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.unSufficientPermission());
       } else {
@@ -89,10 +87,10 @@ class NoteRepository implements INoteRepository {
       final userDoc = await _firestore.userDocument();
       final noteDto = NoteDto.fromDomain(note);
       await userDoc.noteCollection
-          .document(noteDto.id)
-          .updateData(noteDto.toJson());
+          .doc(noteDto.id)
+          .update(noteDto.toJson());
       return right(unit);
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.unSufficientPermission());
       } else if (e.message.contains('NOT_FOUND')) {
@@ -110,12 +108,12 @@ class NoteRepository implements INoteRepository {
       final noteId = note.id.getOrCrash();
       await userDoc.noteCollection.document(noteId).delete();
       return right(unit);
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.unSufficientPermission());
       } else if (e.message.contains('NOT_FOUND')) {
         return left(const NoteFailure.unableToUpdate());
-      }else {
+      } else {
         return left(const NoteFailure.unexpected());
       }
     }
