@@ -1,9 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutterfirebaseddd/domain/core/value_object.dart';
 import 'package:flutterfirebaseddd/domain/notes/todo_item.dart';
 import 'package:flutterfirebaseddd/domain/notes/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/collection.dart';
 
 part 'todo_item_presentation_classes.freezed.dart';
+
+class FormTodos extends ValueNotifier<KtList<TodoItemPrimitives>> {
+  FormTodos() : super(emptyList<TodoItemPrimitives>());
+}
 
 @freezed
 abstract class TodoItemPrimitives implements _$TodoItemPrimitives {
@@ -16,10 +22,10 @@ abstract class TodoItemPrimitives implements _$TodoItemPrimitives {
   }) = _TodoItemPrimitives;
 
   factory TodoItemPrimitives.empty() => TodoItemPrimitives(
-        id: UniqueId(),
-        name: '',
-        done: false,
-      );
+    id: UniqueId(),
+    name: '',
+    done: false,
+  );
 
   factory TodoItemPrimitives.fromDomain(TodoItem todoItem) {
     return TodoItemPrimitives(

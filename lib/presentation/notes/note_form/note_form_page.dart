@@ -6,9 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfirebaseddd/application/notes/note_form/note_bloc.dart';
 import 'package:flutterfirebaseddd/domain/notes/note.dart';
 import 'package:flutterfirebaseddd/injection.dart';
+import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/add_todo_tile_widget.dart';
 import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/body_field.dart';
 import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/color_field.dart';
 import 'package:flutterfirebaseddd/presentation/routes/router.gr.dart';
+import 'package:provider/provider.dart';
+
+import 'misc/todo_item_presentation_classes.dart';
 
 class NoteFormPage extends StatelessWidget {
   final Note editNote;
@@ -120,14 +124,18 @@ class NoteFromPageScaffold extends StatelessWidget {
       body: BlocBuilder(
         buildWhen: (p, c) => p.showErrorMessage != c.showErrorMessage,
         builder: (context, state) {
-          return Form(
-            child: SingleChildScrollView(
-                child: Column(
-              children: <Widget>[
-                const BodyField(),
-                const ColorField(),
-              ],
-            )),
+          return ChangeNotifierProvider(
+            create: (_) => FormTodos(),
+            child: Form(
+              child: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  const BodyField(),
+                  const ColorField(),
+                  const AddTodoTile(),
+                ],
+              )),
+            ),
           );
         },
       ),
