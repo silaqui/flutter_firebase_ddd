@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfirebaseddd/application/auth/auth_bloc.dart';
 import 'package:flutterfirebaseddd/application/auth/bloc.dart';
-import 'package:flutterfirebaseddd/presentation/routes/router.gr.dart';
+import 'package:flutterfirebaseddd/presentation/routes/router.gr.dart'
+    as app_router;
 
 import '../../injection.dart';
 
@@ -20,7 +21,7 @@ class AppWidget extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Notes',
-        builder: ExtendedNavigator(router: Router()),
+        builder: ExtendedNavigator.builder(router: app_router.Router()),
         theme: ThemeData.light().copyWith(
             floatingActionButtonTheme: FloatingActionButtonThemeData(
                 backgroundColor: Colors.purple[900]),
