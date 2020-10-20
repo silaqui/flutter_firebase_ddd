@@ -9,6 +9,7 @@ import 'package:flutterfirebaseddd/injection.dart';
 import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/add_todo_tile_widget.dart';
 import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/body_field.dart';
 import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/color_field.dart';
+import 'package:flutterfirebaseddd/presentation/notes/note_form/widgets/todo_list_widget.dart';
 import 'package:flutterfirebaseddd/presentation/routes/router.gr.dart';
 import 'package:provider/provider.dart';
 
@@ -132,6 +133,7 @@ class NoteFromPageScaffold extends StatelessWidget {
                 children: <Widget>[
                   const BodyField(),
                   const ColorField(),
+                  const TodoListWidget(),
                   const AddTodoTile(),
                 ],
               )),
